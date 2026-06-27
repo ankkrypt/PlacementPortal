@@ -23,7 +23,7 @@ connectDB();
 
 // Middleware
 app.use(cors({ 
-    origin: ['http://localhost:3000', 'https://timscdr_pp.ankkrypt.me'], 
+    origin: ['http://localhost:3000', 'https://pp.ankkrypt.me'], 
     credentials: true 
 }));
 app.use(express.json());
