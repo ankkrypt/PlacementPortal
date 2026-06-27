@@ -17,7 +17,7 @@ export default function CompanyWiseChart({ data }) {
         <XAxis type="number" />
         <YAxis type="category" dataKey="companyName" width={90} />
         <Tooltip />
-        <Bar dataKey="studentsHired" fill="#3b82f6" name="Students Hired" />
+        <Bar dataKey="studentsHired" fill="#1e3a5f" name="Students Hired" />
       </BarChart>
     </ResponsiveContainer>
   );

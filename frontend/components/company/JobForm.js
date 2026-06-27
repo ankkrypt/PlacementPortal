@@ -130,7 +130,7 @@ export default function JobForm({ onSubmit, aiLoading, onAiGenerate }) {
               </button>
             </div>
             <Button onClick={handleAiGenerate} disabled={aiLoading} variant="outline" className="text-xs">
-              {aiLoading ? 'Generating...' : '🤖 Generate with AI'}
+              {aiLoading ? 'Generating...' : 'Generate with AI'}
             </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

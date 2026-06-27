@@ -51,15 +51,15 @@ export default function StudentDashboard() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <StatCard label="Total Applications" value={stats.applications} icon="📋" color="blue" />
-              <StatCard label="Shortlisted" value={stats.shortlisted} icon="⭐" color="green" />
-              <StatCard label="Eligible Jobs" value={stats.jobs} icon="💼" color="purple" />
+              <StatCard label="Total Applications" value={stats.applications} color="blue" />
+              <StatCard label="Shortlisted" value={stats.shortlisted} color="green" />
+              <StatCard label="Eligible Jobs" value={stats.jobs} color="purple" />
             </div>
 
             {profile && !profile.profileComplete && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">⚠️</span>
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 mt-0.5 text-yellow-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
                   <div>
                     <p className="font-medium text-yellow-800">Profile Incomplete</p>
                     <p className="text-sm text-yellow-600">Complete your profile to start applying for jobs.</p>
@@ -72,16 +72,16 @@ export default function StudentDashboard() {
               <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <a href="/student/profile" className="p-3 bg-blue-50 rounded-lg text-blue-700 font-medium hover:bg-blue-100 transition-colors text-center">
-                  📝 Update Profile
+                  Update Profile
                 </a>
                 <a href="/student/resume" className="p-3 bg-green-50 rounded-lg text-green-700 font-medium hover:bg-green-100 transition-colors text-center">
-                  📄 Upload Resume
+                  Upload Resume
                 </a>
                 <a href="/student/jobs" className="p-3 bg-purple-50 rounded-lg text-purple-700 font-medium hover:bg-purple-100 transition-colors text-center">
-                  💼 Browse Jobs
+                  Browse Jobs
                 </a>
                 <a href="/student/applications" className="p-3 bg-orange-50 rounded-lg text-orange-700 font-medium hover:bg-orange-100 transition-colors text-center">
-                  📋 Track Applications
+                  Track Applications
                 </a>
               </div>
             </div>

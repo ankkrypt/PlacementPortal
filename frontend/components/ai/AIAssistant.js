@@ -8,7 +8,7 @@ export function JobMatcher({ onMatch, matches, loading }) {
       <div className="mb-4">
         <p className="text-gray-600 mb-4">AI will analyze your profile and match you with the most suitable jobs.</p>
         <Button onClick={onMatch} disabled={loading}>
-          {loading ? 'Analyzing...' : '🤖 Find Matching Jobs'}
+          {loading ? 'Analyzing...' : 'Find Matching Jobs'}
         </Button>
       </div>
       {matches && (
@@ -20,7 +20,7 @@ export function JobMatcher({ onMatch, matches, loading }) {
                 <h4 className="font-medium text-gray-800">{match.jobTitle}</h4>
                 <span className="px-2 py-1 bg-blue-600 text-white rounded-full text-xs font-medium">{match.fitScore}%</span>
               </div>
-              <p className="text-sm text-gray-500">🏢 {match.company}</p>
+              <p className="text-sm text-gray-500">{match.company}</p>
               <p className="text-sm text-gray-600 mt-1">{match.reason}</p>
             </div>
           ))}
@@ -36,7 +36,7 @@ export function ProfileReviewer({ onReview, review, loading }) {
       <div className="mb-4">
         <p className="text-gray-600 mb-4">Get AI-powered feedback on your profile to improve your chances.</p>
         <Button onClick={onReview} disabled={loading}>
-          {loading ? 'Reviewing...' : '🤖 Review My Profile'}
+          {loading ? 'Reviewing...' : 'Review My Profile'}
         </Button>
       </div>
       {review && (
@@ -47,7 +47,7 @@ export function ProfileReviewer({ onReview, review, loading }) {
           </div>
           {review.strengths?.length > 0 && (
             <div>
-              <h3 className="font-semibold text-green-700 mb-1">✅ Strengths</h3>
+              <h3 className="font-semibold text-green-700 mb-1">Strengths</h3>
               <ul className="list-disc pl-5">
                 {review.strengths.map((s, i) => (
                   <li key={i} className="text-sm text-gray-600">{s}</li>
@@ -57,7 +57,7 @@ export function ProfileReviewer({ onReview, review, loading }) {
           )}
           {review.suggestions?.length > 0 && (
             <div>
-              <h3 className="font-semibold text-blue-700 mb-1">💡 Suggestions</h3>
+              <h3 className="font-semibold text-blue-700 mb-1">Suggestions</h3>
               {review.suggestions.map((s, i) => (
                 <div key={i} className="p-2 bg-blue-50 rounded mb-1">
                   <p className="text-sm font-medium text-blue-800">{s.area}</p>
@@ -155,7 +155,7 @@ export function JDGenerator({ onGenerate, jdData, loading }) {
           />
         </div>
         <Button onClick={handleGenerate} disabled={loading}>
-          {loading ? 'Generating...' : '🤖 Generate JD'}
+          {loading ? 'Generating...' : 'Generate JD'}
         </Button>
       </div>
       {jdData && (
@@ -193,7 +193,7 @@ export function PlacementInsights({ onInsights, insights, loading }) {
       <div className="mb-4">
         <p className="text-gray-600 mb-4">Get AI-generated insights, trends, and recommendations from placement data.</p>
         <Button onClick={onInsights} disabled={loading}>
-          {loading ? 'Analyzing...' : '🤖 Generate Insights'}
+          {loading ? 'Analyzing...' : 'Generate Insights'}
         </Button>
       </div>
       {insights && (
@@ -205,7 +205,7 @@ export function PlacementInsights({ onInsights, insights, loading }) {
           )}
           {insights.insights?.length > 0 && (
             <div>
-              <h3 className="font-semibold text-gray-700 mb-1">📊 Insights</h3>
+              <h3 className="font-semibold text-gray-700 mb-1">Insights</h3>
               <ul className="list-disc pl-5">
                 {insights.insights.map((i, idx) => (
                   <li key={idx} className="text-sm text-gray-600">{i}</li>
@@ -215,7 +215,7 @@ export function PlacementInsights({ onInsights, insights, loading }) {
           )}
           {insights.recommendations?.length > 0 && (
             <div>
-              <h3 className="font-semibold text-gray-700 mb-1">💡 Recommendations</h3>
+              <h3 className="font-semibold text-gray-700 mb-1">Recommendations</h3>
               <ul className="list-disc pl-5">
                 {insights.recommendations.map((r, idx) => (
                   <li key={idx} className="text-sm text-gray-600">{r}</li>

@@ -54,7 +54,14 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-semibold text-gray-800">
+        <div className="flex items-center gap-2 mr-2 pr-3 border-r border-gray-200">
+          <img src="/logo.png" alt="TIMSCDR" className="w-8 h-8 rounded-lg object-contain" />
+          <div className="leading-tight">
+            <p className="text-sm font-bold text-gray-800">TIMSCDR</p>
+            <p className="text-[9px] text-gray-400">Placement Portal</p>
+          </div>
+        </div>
+        <h1 className="text-lg font-semibold text-gray-700">
           Welcome, {user.name || user.email}
         </h1>
       </div>

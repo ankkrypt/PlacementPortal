@@ -53,7 +53,7 @@ export default function CompanyJobsPage() {
           </div>
         ) : jobs.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="text-5xl mb-4">💼</div>
+            <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
             <p className="text-gray-500 text-lg">No jobs posted yet</p>
             <Link href="/company/jobs/create">
               <Button className="mt-4">Post Your First Job</Button>
@@ -81,9 +81,9 @@ export default function CompanyJobsPage() {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3 text-xs text-gray-500">
-                  <span>📅 Deadline: {job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'}</span>
-                  <span>👥 Vacancies: {job.vacancies || 'N/A'}</span>
-                  <span>📊 Min CGPA: {job.minCgpa || 'N/A'}</span>
+                  <span>Deadline: {job.applicationDeadline ? new Date(job.applicationDeadline).toLocaleDateString() : 'N/A'}</span>
+                  <span>Vacancies: {job.vacancies || 'N/A'}</span>
+                  <span>Min CGPA: {job.minCgpa || 'N/A'}</span>
                 </div>
               </div>
             ))}

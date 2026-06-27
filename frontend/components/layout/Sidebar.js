@@ -5,35 +5,35 @@ import { useAuth } from '@/context/AuthContext';
 
 const roleLinks = {
   student: [
-    { label: 'Dashboard', href: '/student/dashboard', icon: '📊' },
-    { label: 'Profile', href: '/student/profile', icon: '👤' },
-    { label: 'Resume', href: '/student/resume', icon: '📄' },
-    { label: 'Jobs', href: '/student/jobs', icon: '💼' },
-    { label: 'Applications', href: '/student/applications', icon: '📋' },
-    { label: 'Notifications', href: '/student/notifications', icon: '🔔' },
-    { label: 'AI Tools', href: '/ai', icon: '🤖' },
+    { label: 'Dashboard', href: '/student/dashboard' },
+    { label: 'Profile', href: '/student/profile' },
+    { label: 'Resume', href: '/student/resume' },
+    { label: 'Jobs', href: '/student/jobs' },
+    { label: 'Applications', href: '/student/applications' },
+    { label: 'Notifications', href: '/student/notifications' },
+    { label: 'AI Tools', href: '/ai' },
   ],
   company: [
-    { label: 'Dashboard', href: '/company/dashboard', icon: '📊' },
-    { label: 'Profile', href: '/company/profile', icon: '🏢' },
-    { label: 'My Jobs', href: '/company/jobs', icon: '💼' },
-    { label: 'Interviews', href: '/company/interviews', icon: '📅' },
-    { label: 'AI Tools', href: '/ai', icon: '🤖' },
+    { label: 'Dashboard', href: '/company/dashboard' },
+    { label: 'Profile', href: '/company/profile' },
+    { label: 'My Jobs', href: '/company/jobs' },
+    { label: 'Interviews', href: '/company/interviews' },
+    { label: 'AI Tools', href: '/ai' },
   ],
   admin: [
-    { label: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
-    { label: 'Students', href: '/admin/students', icon: '👨‍🎓' },
-    { label: 'Companies', href: '/admin/companies', icon: '🏢' },
-    { label: 'Drives', href: '/admin/drives', icon: '🚗' },
-    { label: 'Announcements', href: '/admin/announcements', icon: '📢' },
-    { label: 'Bulk Import', href: '/admin/bulk-import', icon: '📥' },
-    { label: 'Reports', href: '/admin/reports', icon: '📈' },
-    { label: 'AI Insights', href: '/ai', icon: '🤖' },
+    { label: 'Dashboard', href: '/admin/dashboard' },
+    { label: 'Students', href: '/admin/students' },
+    { label: 'Companies', href: '/admin/companies' },
+    { label: 'Drives', href: '/admin/drives' },
+    { label: 'Announcements', href: '/admin/announcements' },
+    { label: 'Bulk Import', href: '/admin/bulk-import' },
+    { label: 'Reports', href: '/admin/reports' },
+    { label: 'AI Insights', href: '/ai' },
   ],
   faculty: [
-    { label: 'Dashboard', href: '/faculty/dashboard', icon: '📊' },
-    { label: 'Reports', href: '/faculty/reports', icon: '📈' },
-    { label: 'AI Tools', href: '/ai', icon: '🤖' },
+    { label: 'Dashboard', href: '/faculty/dashboard' },
+    { label: 'Reports', href: '/faculty/reports' },
+    { label: 'AI Tools', href: '/ai' },
   ],
 };
 
@@ -46,10 +46,13 @@ export default function Sidebar() {
   const links = roleLinks[user.role] || [];
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen">
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="text-lg font-bold text-gray-800">Placement Portal</h2>
-        <p className="text-sm text-gray-500 capitalize">{user.role}</p>
+    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen flex flex-col">
+      <div className="p-4 border-b border-gray-200 flex items-center gap-3">
+        <img src="/logo.png" alt="TIMSCDR Logo" className="w-10 h-10 rounded-lg object-contain" />
+        <div className="flex-1 min-w-0">
+          <h2 className="text-base font-bold text-gray-800 leading-tight">TIMSCDR</h2>
+          <p className="text-[10px] text-gray-500 leading-tight">Thakur Institute of Management Studies, Career Development & Research</p>
+        </div>
       </div>
       <nav className="p-4 space-y-1">
         {links.map((link) => (
@@ -62,7 +65,6 @@ export default function Sidebar() {
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
-            <span>{link.icon}</span>
             {link.label}
           </Link>
         ))}

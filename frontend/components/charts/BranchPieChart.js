@@ -1,7 +1,7 @@
 'use client';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316', '#14b8a6', '#6366f1'];
+const COLORS = ['#1e3a5f', '#2d6a4f', '#9a7d2a', '#8b2d2d', '#5b3c7a', '#433e8a', '#a65d2e', '#2d6a4f', '#162d4a'];
 
 export default function BranchPieChart({ data }) {
   if (!data || data.length === 0) {

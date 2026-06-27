@@ -56,8 +56,8 @@ export default function AdminDashboard() {
         {/* Pending Approvals Alert */}
         {(pending.students > 0 || pending.companies > 0) && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">⚠️</span>
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 mt-0.5 text-yellow-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
               <div className="flex-1">
                 <p className="font-medium text-yellow-800">Pending Approvals</p>
                 <p className="text-sm text-yellow-600">
@@ -75,15 +75,15 @@ export default function AdminDashboard() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <StatCard label="Total Students" value={summary?.totalStudents || 0} icon="🎓" color="blue" />
-          <StatCard label="Placed" value={summary?.placed || 0} icon="✅" color="green" />
-          <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} icon="📊" color="purple" />
-          <StatCard label="Avg Package" value={summary?.avgPackage ? `${summary.avgPackage} LPA` : '0 LPA'} icon="💰" color="yellow" />
+          <StatCard label="Total Students" value={summary?.totalStudents || 0} color="blue" />
+          <StatCard label="Placed" value={summary?.placed || 0} color="green" />
+          <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} color="purple" />
+          <StatCard label="Avg Package" value={summary?.avgPackage ? `${summary.avgPackage} LPA` : '0 LPA'} color="yellow" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <StatCard label="Companies" value={summary?.totalCompanies || 0} icon="🏢" color="indigo" />
-          <StatCard label="Active Drives" value={summary?.totalDrives || 0} icon="🚗" color="red" />
-          <StatCard label="Highest Package" value={summary?.highestPackage ? `${summary.highestPackage} LPA` : '0 LPA'} icon="🏆" color="green" />
+          <StatCard label="Companies" value={summary?.totalCompanies || 0} color="indigo" />
+          <StatCard label="Active Drives" value={summary?.totalDrives || 0} color="red" />
+          <StatCard label="Highest Package" value={summary?.highestPackage ? `${summary.highestPackage} LPA` : '0 LPA'} color="green" />
         </div>
 
         {/* Quick Links */}
@@ -91,22 +91,22 @@ export default function AdminDashboard() {
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Links</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <Link href="/admin/students" className="p-3 bg-blue-50 rounded-lg text-blue-700 font-medium hover:bg-blue-100 transition-colors">
-              👨‍🎓 Manage Students
+              Manage Students
             </Link>
             <Link href="/admin/companies" className="p-3 bg-purple-50 rounded-lg text-purple-700 font-medium hover:bg-purple-100 transition-colors">
-              🏢 Manage Companies
+              Manage Companies
             </Link>
             <Link href="/admin/drives" className="p-3 bg-green-50 rounded-lg text-green-700 font-medium hover:bg-green-100 transition-colors">
-              🚗 Manage Drives
+              Manage Drives
             </Link>
             <Link href="/admin/announcements" className="p-3 bg-yellow-50 rounded-lg text-yellow-700 font-medium hover:bg-yellow-100 transition-colors">
-              📢 Post Announcement
+              Post Announcement
             </Link>
             <Link href="/admin/bulk-import" className="p-3 bg-indigo-50 rounded-lg text-indigo-700 font-medium hover:bg-indigo-100 transition-colors">
-              📥 Bulk Import
+              Bulk Import
             </Link>
             <Link href="/admin/reports" className="p-3 bg-red-50 rounded-lg text-red-700 font-medium hover:bg-red-100 transition-colors">
-              📈 View Reports
+              View Reports
             </Link>
           </div>
         </div>

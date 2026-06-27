@@ -78,7 +78,7 @@ export default function BulkImportForm() {
     <div className="space-y-6">
       {/* Download Sample */}
       <div className="flex justify-end">
-        <Button onClick={downloadSample} variant="outline">📥 Download Sample CSV</Button>
+        <Button onClick={downloadSample} variant="outline">Download Sample CSV</Button>
       </div>
 
       {/* Upload Area */}
@@ -93,7 +93,7 @@ export default function BulkImportForm() {
           accept=".csv"
           className="hidden"
         />
-        <div className="text-4xl mb-3">📤</div>
+        <svg className="w-10 h-10 mx-auto mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
         <p className="text-gray-600 font-medium">
           {file ? file.name : 'Click to select CSV file'}
         </p>
@@ -143,10 +143,10 @@ export default function BulkImportForm() {
           result.failed?.length > 0 ? 'bg-yellow-50 border-yellow-200' : 'bg-green-50 border-green-200'
         }`}>
           <h3 className="font-semibold text-gray-800 mb-2">Import Results</h3>
-          <p className="text-green-700">✅ {result.imported} students imported successfully</p>
+          <p className="text-green-700">Success: {result.imported} students imported successfully</p>
           {result.failed?.length > 0 && (
             <div className="mt-2">
-              <p className="text-red-600">❌ {result.failed.length} failed:</p>
+              <p className="text-red-600">Failed: {result.failed.length} entries:</p>
               {result.failed.map((f, i) => (
                 <p key={i} className="text-sm text-red-500 ml-4">{f.row?.email || 'Unknown'}: {f.reason}</p>
               ))}

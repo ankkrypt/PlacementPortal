@@ -48,7 +48,7 @@ export default function CompanyInterviewsPage() {
           </div>
         ) : interviews.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="text-5xl mb-4">📅</div>
+            <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
             <p className="text-gray-500 text-lg">No interviews scheduled</p>
           </div>
         ) : (
@@ -71,7 +71,7 @@ export default function CompanyInterviewsPage() {
                     </p>
                     {interview.meetLink && (
                       <a href={interview.meetLink} target="_blank" className="text-sm text-blue-600 hover:text-blue-800 mt-1 inline-block">
-                        🔗 Join Meeting
+                        Join Meeting
                       </a>
                     )}
                   </div>

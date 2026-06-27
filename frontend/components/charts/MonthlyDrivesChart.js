@@ -13,7 +13,7 @@ export default function MonthlyDrivesChart({ data }) {
         <XAxis dataKey="month" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Line type="monotone" dataKey="count" stroke="#3b82f6" strokeWidth={2} name="Drives" />
+        <Line type="monotone" dataKey="count" stroke="#1e3a5f" strokeWidth={2} name="Drives" />
       </LineChart>
     </ResponsiveContainer>
   );

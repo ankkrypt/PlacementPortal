@@ -64,9 +64,9 @@ export default function FacultyReportsPage() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <StatCard label="Total Students" value={summary?.totalStudents || 0} icon="🎓" color="blue" />
-              <StatCard label="Placed" value={summary?.placed || 0} icon="✅" color="green" />
-              <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} icon="📊" color="purple" />
+              <StatCard label="Total Students" value={summary?.totalStudents || 0} color="blue" />
+              <StatCard label="Placed" value={summary?.placed || 0} color="green" />
+              <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} color="purple" />
             </div>
 
             {/* Branch Filter */}

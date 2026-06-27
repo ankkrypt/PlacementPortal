@@ -125,26 +125,26 @@ export default function AdminReportsPage() {
           <h1 className="text-2xl font-bold text-gray-800">Placement Reports</h1>
           <div className="flex gap-2">
             <Button onClick={handleAiInsights} variant="outline">
-              {aiLoading ? 'Loading...' : '🤖 AI Insights'}
+              {aiLoading ? 'Loading...' : 'AI Insights'}
             </Button>
-            <Button onClick={handleExportPDF} variant="secondary">📥 Export PDF</Button>
+            <Button onClick={handleExportPDF} variant="secondary">Export PDF</Button>
           </div>
         </div>
 
         <div ref={reportRef} className="space-y-6">
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <StatCard label="Total Students" value={summary?.totalStudents || 0} icon="🎓" color="blue" />
-            <StatCard label="Placed" value={summary?.placed || 0} icon="✅" color="green" />
-            <StatCard label="Unplaced" value={summary?.unplaced || 0} icon="❌" color="red" />
-            <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} icon="📊" color="purple" />
-            <StatCard label="Avg Package" value={summary?.avgPackage ? `${summary.avgPackage} LPA` : '0 LPA'} icon="💰" color="yellow" />
+            <StatCard label="Total Students" value={summary?.totalStudents || 0} color="blue" />
+            <StatCard label="Placed" value={summary?.placed || 0} color="green" />
+            <StatCard label="Unplaced" value={summary?.unplaced || 0} color="red" />
+            <StatCard label="Placement %" value={summary?.placementPercentage ? `${summary.placementPercentage}%` : '0%'} color="purple" />
+            <StatCard label="Avg Package" value={summary?.avgPackage ? `${summary.avgPackage} LPA` : '0 LPA'} color="yellow" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <StatCard label="Highest Package" value={summary?.highestPackage ? `${summary.highestPackage} LPA` : '0 LPA'} icon="🏆" color="green" />
-            <StatCard label="Companies" value={summary?.totalCompanies || 0} icon="🏢" color="indigo" />
-            <StatCard label="Total Drives" value={summary?.totalDrives || 0} icon="🚗" color="red" />
+            <StatCard label="Highest Package" value={summary?.highestPackage ? `${summary.highestPackage} LPA` : '0 LPA'} color="green" />
+            <StatCard label="Companies" value={summary?.totalCompanies || 0} color="indigo" />
+            <StatCard label="Total Drives" value={summary?.totalDrives || 0} color="red" />
           </div>
 
           {/* Branch Chart */}
@@ -215,7 +215,7 @@ export default function AdminReportsPage() {
               )}
               {aiInsights.insights?.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-gray-700 mb-2">📊 Insights</h3>
+                  <h3 className="font-semibold text-gray-700 mb-2">Insights</h3>
                   <ul className="list-disc pl-5 space-y-1">
                     {aiInsights.insights.map((i, idx) => (
                       <li key={idx} className="text-sm text-gray-600">{i}</li>
@@ -225,7 +225,7 @@ export default function AdminReportsPage() {
               )}
               {aiInsights.trends?.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-gray-700 mb-2">📈 Trends</h3>
+                  <h3 className="font-semibold text-gray-700 mb-2">Trends</h3>
                   <ul className="list-disc pl-5 space-y-1">
                     {aiInsights.trends.map((t, idx) => (
                       <li key={idx} className="text-sm text-gray-600">{t}</li>
@@ -235,7 +235,7 @@ export default function AdminReportsPage() {
               )}
               {aiInsights.recommendations?.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-gray-700 mb-2">💡 Recommendations</h3>
+                  <h3 className="font-semibold text-gray-700 mb-2">Recommendations</h3>
                   <ul className="list-disc pl-5 space-y-1">
                     {aiInsights.recommendations.map((r, idx) => (
                       <li key={idx} className="text-sm text-gray-600">{r}</li>

@@ -17,7 +17,7 @@ export default function StatCard({ label, value, icon, color = 'blue' }) {
           <p className="text-3xl font-bold text-gray-800 mt-1">{value}</p>
         </div>
         {icon && (
-          <div className={`w-12 h-12 rounded-lg ${colors[color] || colors.blue} flex items-center justify-center text-2xl`}>
+          <div className={`w-12 h-12 rounded-lg ${colors[color] || colors.blue} flex items-center justify-center`}>
             {icon}
           </div>
         )}

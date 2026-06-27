@@ -63,10 +63,10 @@ export default function CompanyDashboard() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-              <StatCard label="Posted Jobs" value={stats.jobs} icon="💼" color="blue" />
-              <StatCard label="Total Applicants" value={stats.applicants} icon="👥" color="purple" />
-              <StatCard label="Shortlisted" value={stats.shortlisted} icon="⭐" color="green" />
-              <StatCard label="Selected" value={stats.selected} icon="🎉" color="indigo" />
+              <StatCard label="Posted Jobs" value={stats.jobs} color="blue" />
+              <StatCard label="Total Applicants" value={stats.applicants} color="purple" />
+              <StatCard label="Shortlisted" value={stats.shortlisted} color="green" />
+              <StatCard label="Selected" value={stats.selected} color="indigo" />
             </div>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">

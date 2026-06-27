@@ -26,10 +26,10 @@ export default function AIPage() {
   const role = user?.role;
 
   const tabs = [
-    { label: 'Job Matcher', icon: '🎯', roles: ['student'] },
-    { label: 'Profile Reviewer', icon: '📝', roles: ['student'] },
-    { label: 'JD Generator', icon: '✍️', roles: ['company'] },
-    { label: 'Placement Insights', icon: '📊', roles: ['admin', 'faculty'] },
+    { label: 'Job Matcher', roles: ['student'] },
+    { label: 'Profile Reviewer', roles: ['student'] },
+    { label: 'JD Generator', roles: ['company'] },
+    { label: 'Placement Insights', roles: ['admin', 'faculty'] },
   ];
 
   const visibleTabs = tabs.filter((t) => t.roles.includes(role));
@@ -94,7 +94,7 @@ export default function AIPage() {
   return (
     <RoleLayout allowedRoles={['student', 'company', 'admin', 'faculty']}>
       <div>
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">🤖 AI Tools</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">AI Tools</h1>
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           {/* Tabs */}
@@ -109,7 +109,7 @@ export default function AIPage() {
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                {tab.icon} {tab.label}
+                {tab.label}
               </button>
             ))}
           </div>

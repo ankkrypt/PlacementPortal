@@ -14,7 +14,7 @@ export default function PlacementBarChart({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="placed" fill="#22c55e" name="Placed" />
+        <Bar dataKey="placed" fill="#1b5a3a" name="Placed" />
         <Bar dataKey="unplaced" fill="#94a3b8" name="Unplaced" />
       </BarChart>
     </ResponsiveContainer>

@@ -161,15 +161,15 @@ export default function StudentJobDetail() {
           <div className="pt-4 border-t border-gray-200">
             {!profile?.profileComplete ? (
               <div className="p-3 bg-yellow-50 rounded-lg mb-3">
-                <p className="text-sm text-yellow-700">⚠️ Complete your profile before applying</p>
+                <p className="text-sm text-yellow-700">Complete your profile before applying</p>
               </div>
             ) : hasApplied ? (
               <div className="p-3 bg-green-50 rounded-lg">
-                <p className="text-sm text-green-700">✅ You have already applied for this job</p>
+                <p className="text-sm text-green-700">You have already applied for this job</p>
               </div>
             ) : isExpired ? (
               <div className="p-3 bg-red-50 rounded-lg">
-                <p className="text-sm text-red-700">⏰ Application deadline has passed</p>
+                <p className="text-sm text-red-700">Application deadline has passed</p>
               </div>
             ) : null}
             <Button

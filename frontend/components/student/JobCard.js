@@ -33,10 +33,10 @@ export default function JobCard({ job }) {
         </div>
 
         <div className="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-3">
-          <div>💰 <strong>{job.package ? `${job.package} LPA` : 'N/A'}</strong></div>
-          <div>📍 {job.location || 'N/A'}</div>
-          {job.minCgpa > 0 && <div>📊 Min CGPA: <strong>{job.minCgpa}</strong></div>}
-          <div>⏰ {deadline}</div>
+          <div>Package: <strong>{job.package ? `${job.package} LPA` : 'N/A'}</strong></div>
+          <div>Location: {job.location || 'N/A'}</div>
+          {job.minCgpa > 0 && <div>Min CGPA: <strong>{job.minCgpa}</strong></div>}
+          <div>Deadline: {deadline}</div>
         </div>
 
         {!job.isEligible && job.ineligibilityReasons?.length > 0 && (
@@ -49,7 +49,7 @@ export default function JobCard({ job }) {
         )}
 
         {isExpired && (
-          <p className="text-xs text-red-500 font-medium mt-2">⏰ Application deadline passed</p>
+          <p className="text-xs text-red-500 font-medium mt-2">Application deadline passed</p>
         )}
 
         {job.requiredSkills?.length > 0 && (

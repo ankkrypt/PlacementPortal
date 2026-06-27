@@ -31,11 +31,24 @@ export default function RegisterPage() {
 
   if (registered) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center">
-          <div className="text-5xl mb-4">🎉</div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 relative overflow-hidden">
+        {/* Background Banner */}
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
+          <img
+            src="/timscdr_banner.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center relative">
+          <img
+            src="/logo.png"
+            alt="TIMSCDR Logo"
+            className="w-16 h-16 mx-auto mb-4 rounded-xl object-contain"
+          />
+          <svg className="w-14 h-14 mx-auto mb-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Registration Successful!</h1>
-          <p className="text-gray-500 mb-6">
+          <p className="text-sm text-gray-500 mb-6">
             Your account is pending approval. You will be notified once approved.
           </p>
           <Link
@@ -50,11 +63,30 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Create Account</h1>
-          <p className="text-gray-500 mt-2">Join the placement portal</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 relative overflow-hidden">
+      {/* Background Banner */}
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
+        <img
+          src="/timscdr_banner.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative">
+        <div className="text-center mb-6">
+          <img
+            src="/logo.png"
+            alt="TIMSCDR Logo"
+            className="w-20 h-20 mx-auto mb-3 rounded-xl object-contain"
+          />
+          <h1 className="text-2xl font-bold text-gray-800 leading-tight">Create Account</h1>
+          <p className="text-xs text-gray-500 mt-1">
+            TIMSCDR — Thakur Institute of Management Studies,
+            <br />
+            Career Development & Research
+          </p>
+          <div className="w-12 h-0.5 bg-blue-600 mx-auto mt-3 mb-2"></div>
+          <p className="text-gray-500 text-sm">Join the placement portal</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -103,9 +135,8 @@ export default function RegisterPage() {
                     ? 'border-blue-600 bg-blue-50 text-blue-700'
                     : 'border-gray-200 text-gray-600 hover:border-gray-300'
                 }`}
-              >
-                🎓 Student
-              </button>
+              >                  Student
+                </button>
               <button
                 type="button"
                 onClick={() => setRole('company')}
@@ -115,7 +146,7 @@ export default function RegisterPage() {
                     : 'border-gray-200 text-gray-600 hover:border-gray-300'
                 }`}
               >
-                🏢 Company
+                Company
               </button>
             </div>
           </div>

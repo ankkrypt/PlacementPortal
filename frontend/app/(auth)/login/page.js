@@ -34,11 +34,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Placement Portal</h1>
-          <p className="text-gray-500 mt-2">Sign in to your account</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 relative overflow-hidden">
+      {/* Background Banner */}
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
+        <img
+          src="/timscdr_banner.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative">
+        <div className="text-center mb-6">
+          <img
+            src="/logo.png"
+            alt="TIMSCDR Logo"
+            className="w-20 h-20 mx-auto mb-3 rounded-xl object-contain"
+          />
+          <h1 className="text-2xl font-bold text-gray-800 leading-tight">TIMSCDR</h1>
+          <p className="text-xs text-gray-500 mt-1 max-w-xs mx-auto">
+            Thakur Institute of Management Studies,
+            <br />
+            Career Development & Research
+          </p>
+          <div className="w-12 h-0.5 bg-blue-600 mx-auto mt-3 mb-2"></div>
+          <p className="text-gray-500 text-sm">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

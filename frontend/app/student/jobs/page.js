@@ -57,7 +57,7 @@ export default function StudentJobsPage() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Browse Jobs</h1>
           <Button onClick={handleAiMatch} variant="outline">
-            {aiLoading ? 'Loading...' : '🤖 AI Job Matches'}
+            {aiLoading ? 'Loading...' : 'AI Job Matches'}
           </Button>
         </div>
 
@@ -103,7 +103,7 @@ export default function StudentJobsPage() {
           </div>
         ) : filteredJobs.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-5xl mb-4">🔍</div>
+            <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             <p className="text-gray-500 text-lg">No jobs found matching your filters</p>
           </div>
         ) : (
@@ -131,7 +131,7 @@ export default function StudentJobsPage() {
                       {match.fitScore}% Match
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-1">🏢 {match.company}</p>
+                  <p className="text-sm text-gray-600 mb-1">{match.company}</p>
                   <p className="text-sm text-gray-500">{match.reason}</p>
                 </div>
               ))}

@@ -57,7 +57,7 @@ export default function AdminDrivesPage() {
           </div>
         ) : sortedDrives.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="text-5xl mb-4">🚗</div>
+            <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7h8m-8 0a2 2 0 01-2-2V4a2 2 0 012-2h8a2 2 0 012 2v1m-8 0h8m-10 5h.01M6 12h.01M18 12h.01M6 16h.01M18 16h.01M4 21h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
             <p className="text-gray-500 text-lg">No drives scheduled</p>
             <Link href="/admin/drives/create">
               <Button className="mt-4">Create First Drive</Button>
@@ -74,10 +74,10 @@ export default function AdminDrivesPage() {
                       <Badge status={drive.status} />
                     </div>
                     <p className="text-sm text-gray-500 mt-1">
-                      🏢 {drive.company?.companyName || 'N/A'} • 💼 {drive.job?.title || 'N/A'}
+                      {drive.company?.companyName || 'N/A'} • {drive.job?.title || 'N/A'}
                     </p>
                     {drive.date && (
-                      <p className="text-sm text-gray-500">📅 {new Date(drive.date).toLocaleDateString()} • 📍 {drive.venue || 'N/A'}</p>
+                      <p className="text-sm text-gray-500">{new Date(drive.date).toLocaleDateString()} • {drive.venue || 'N/A'}</p>
                     )}
                   </div>
                   <Button onClick={() => handleDelete(drive._id)} variant="danger" className="text-xs">Delete</Button>

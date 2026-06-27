@@ -22,9 +22,9 @@ export default function ProfileForm({ profile, onSave }) {
   const [saving, setSaving] = useState(false);
 
   const tabs = [
-    { label: 'Personal & Academic', icon: '📚' },
-    { label: 'Skills & Certifications', icon: '🏆' },
-    { label: 'Achievements & Links', icon: '🔗' },
+    { label: 'Personal & Academic' },
+    { label: 'Skills & Certifications' },
+    { label: 'Achievements & Links' },
   ];
 
   const addSkill = () => {
@@ -112,7 +112,7 @@ export default function ProfileForm({ profile, onSave }) {
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            {tab.icon} {tab.label}
+            {tab.label}
           </button>
         ))}
       </div>
