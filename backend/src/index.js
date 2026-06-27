@@ -41,7 +41,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/ai', aiRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ success: true, message: 'Placement Portal API is running' });
 });
 
