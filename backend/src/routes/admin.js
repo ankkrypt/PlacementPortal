@@ -18,6 +18,55 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // ===== Faculty Management =====
 
+// GET /api/admin/faculty - list all faculty
+router.get('/faculty', async (req, res) => {
+  try {
+    const faculty = await User.find({ role: 'faculty' })
+      .select('-password')
+      .sort({ name: 1 });
+    res.json({ success: true, data: faculty });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// PUT /api/admin/faculty/:id - update faculty
+router.put('/faculty/:id', async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const update = {};
+    if (name) update.name = name;
+    if (email) update.email = email;
+
+    const faculty = await User.findOneAndUpdate(
+      { _id: req.params.id, role: 'faculty' },
+      { $set: update },
+      { new: true }
+    ).select('-password');
+
+    if (!faculty) {
+      return res.status(404).json({ success: false, message: 'Faculty not found' });
+    }
+
+    res.json({ success: true, data: faculty });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// DELETE /api/admin/faculty/:id - delete faculty
+router.delete('/faculty/:id', async (req, res) => {
+  try {
+    const faculty = await User.findOneAndDelete({ _id: req.params.id, role: 'faculty' });
+    if (!faculty) {
+      return res.status(404).json({ success: false, message: 'Faculty not found' });
+    }
+    res.json({ success: true, message: 'Faculty deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // POST /api/admin/faculty - create faculty account
 router.post('/faculty', async (req, res) => {
   try {

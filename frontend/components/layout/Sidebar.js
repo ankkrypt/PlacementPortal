@@ -23,16 +23,19 @@ const roleLinks = {
   admin: [
     { label: 'Dashboard', href: '/admin/dashboard' },
     { label: 'Students', href: '/admin/students' },
+    { label: 'Faculty', href: '/admin/faculty' },
     { label: 'Companies', href: '/admin/companies' },
     { label: 'Drives', href: '/admin/drives' },
     { label: 'Announcements', href: '/admin/announcements' },
     { label: 'Bulk Import', href: '/admin/bulk-import' },
+    { label: 'Notifications', href: '/student/notifications' },
     { label: 'Reports', href: '/admin/reports' },
     { label: 'AI Insights', href: '/ai' },
   ],
   faculty: [
     { label: 'Dashboard', href: '/faculty/dashboard' },
     { label: 'Reports', href: '/faculty/reports' },
+    { label: 'Notifications', href: '/student/notifications' },
     { label: 'AI Tools', href: '/ai' },
   ],
 };

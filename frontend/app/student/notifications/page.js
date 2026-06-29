@@ -15,8 +15,8 @@ export default function NotificationsPage() {
 
   const fetchNotifications = async () => {
     try {
-      const res = await api.get('/students/notifications?limit=50');
-      setNotifications(res.data.data);
+      const res = await api.get('/notifications?limit=50');
+      setNotifications(res.data.data.notifications || []);
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -26,7 +26,7 @@ export default function NotificationsPage() {
 
   const markAllRead = async () => {
     try {
-      await api.put('/students/notifications/read-all');
+      await api.put('/notifications/read-all');
       setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
       toast.success('All notifications marked as read');
     } catch (error) {

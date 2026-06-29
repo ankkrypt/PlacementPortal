@@ -2,8 +2,6 @@
 import { useState, useEffect } from 'react';
 import RoleLayout from '@/components/layout/RoleLayout';
 import ApprovalTable from '@/components/admin/ApprovalTable';
-import Button from '@/components/ui/Button';
-import Modal from '@/components/ui/Modal';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 
@@ -13,9 +11,6 @@ export default function AdminStudentsPage() {
   const [approvedStudents, setApprovedStudents] = useState([]);
   const [filters, setFilters] = useState({ branch: '', placed: '' });
   const [loading, setLoading] = useState(true);
-  const [facultyModal, setFacultyModal] = useState(false);
-  const [facultyForm, setFacultyForm] = useState({ name: '', email: '', password: '' });
-
   const branches = ['CS', 'IT', 'EC', 'ME', 'CE', 'EE', 'MCA', 'MBA', 'Other'];
 
   useEffect(() => {
@@ -62,24 +57,11 @@ export default function AdminStudentsPage() {
     }
   };
 
-  const handleCreateFaculty = async (e) => {
-    e.preventDefault();
-    try {
-      await api.post('/admin/faculty', facultyForm);
-      toast.success('Faculty account created!');
-      setFacultyModal(false);
-      setFacultyForm({ name: '', email: '', password: '' });
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to create faculty');
-    }
-  };
-
   return (
     <RoleLayout allowedRoles={['admin']}>
       <div>
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Students</h1>
-          <Button onClick={() => setFacultyModal(true)} variant="outline">+ Create Faculty</Button>
         </div>
 
         {/* Tabs */}
@@ -172,43 +154,6 @@ export default function AdminStudentsPage() {
           </div>
         )}
 
-        {/* Create Faculty Modal */}
-        <Modal isOpen={facultyModal} onClose={() => setFacultyModal(false)} title="Create Faculty Account">
-          <form onSubmit={handleCreateFaculty} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-              <input
-                type="text"
-                value={facultyForm.name}
-                onChange={(e) => setFacultyForm({ ...facultyForm, name: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                value={facultyForm.email}
-                onChange={(e) => setFacultyForm({ ...facultyForm, email: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-              <input
-                type="password"
-                value={facultyForm.password}
-                onChange={(e) => setFacultyForm({ ...facultyForm, password: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                minLength={6}
-                required
-              />
-            </div>
-            <Button type="submit">Create Faculty</Button>
-          </form>
-        </Modal>
       </div>
     </RoleLayout>
   );

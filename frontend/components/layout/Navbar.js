@@ -110,7 +110,7 @@ export default function Navbar() {
                 )}
               </div>
               <Link
-                href={'/student/notifications'}
+                href="/student/notifications"
                 className="block p-3 text-center text-sm text-blue-600 hover:text-blue-800 border-t border-gray-100"
                 onClick={() => setShowDropdown(false)}
               >

@@ -64,36 +64,252 @@ export default function AdminReportsPage() {
 
   const handleExportPDF = async () => {
     try {
-      const { default: jsPDF } = await import('jspdf');
+      const { jsPDF } = await import('jspdf');
       const { default: html2canvas } = await import('html2canvas');
 
       const pdf = new jsPDF('p', 'mm', 'a4');
       const reportEl = reportRef.current;
-
       if (!reportEl) return;
 
-      const canvas = await html2canvas(reportEl, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = 190;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 14;
 
-      let heightLeft = imgHeight;
-      let position = 10;
+      // ── Brand colors (matching website) ──────────────────────
+      const navy = [30, 58, 95];        // #1e3a5f
+      const accent = [58, 95, 138];     // #3a5f8a
+      const lightBlue = [239, 244, 250]; // #eff4fa
 
-      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-      heightLeft -= pdf.internal.pageSize.height - 20;
+      let pageNum = 0;
 
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight + 10;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-        heightLeft -= pdf.internal.pageSize.height - 20;
+      // ── Helper: draw branded header on current page ───────────
+      const addHeader = () => {
+        pageNum++;
+        // Main header bar
+        pdf.setFillColor(...navy);
+        pdf.rect(0, 0, pageWidth, 14, 'F');
+        // Accent subtitle bar
+        pdf.setFillColor(...accent);
+        pdf.rect(0, 14, pageWidth, 5, 'F');
+        // College name
+        pdf.setTextColor(255, 255, 255);
+        pdf.setFontSize(9);
+        pdf.text('TIMSCDR', margin, 9);
+        pdf.setFontSize(6);
+        pdf.text('Placement Portal', margin, 13);
+        // Title and date on subtitle bar
+        pdf.setFontSize(7);
+        pdf.text('Placement Report', margin, 17.5);
+        const dateStr = new Date().toLocaleDateString('en-IN', {
+          year: 'numeric', month: 'short', day: 'numeric',
+        });
+        pdf.text(`Generated: ${dateStr}`, pageWidth - margin, 17.5, { align: 'right' });
+        // Thin separator below header
+        pdf.setDrawColor(...accent);
+        pdf.setLineWidth(0.3);
+        pdf.line(margin, 20, pageWidth - margin, 20);
+      };
+
+      // ── Helper: draw branded footer on current page ───────────
+      const addFooter = () => {
+        pdf.setFillColor(...navy);
+        pdf.rect(0, pageHeight - 8, pageWidth, 8, 'F');
+        pdf.setTextColor(255, 255, 255);
+        pdf.setFontSize(6);
+        pdf.text('TIMSCDR Placement Portal', margin, pageHeight - 2.5);
+        pdf.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 2.5, { align: 'right' });
+      };
+
+      // ── Helper: draw a section title bar ─────────────────────
+      const addSectionTitle = (y, title) => {
+        pdf.setFillColor(...lightBlue);
+        pdf.rect(margin, y - 4, pageWidth - 2 * margin, 7, 'F');
+        pdf.setTextColor(...navy);
+        pdf.setFontSize(10);
+        pdf.text(title, margin + 2, y + 0.5);
+        return y + 7;
+      };
+
+      // ──────────────────────────────────────────────────────────
+      // TRY: Visual capture via html2canvas
+      // ──────────────────────────────────────────────────────────
+      try {
+        const canvas = await html2canvas(reportEl, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+        });
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = pageWidth - 2 * margin;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // Render image across pages with header/footer overlays
+        const headerHeight = 20; // space for header + separator
+        const footerHeight = 8;
+        const usableHeight = pageHeight - headerHeight - footerHeight - 4;
+
+        let yOffset = 0;
+        while (yOffset < imgHeight) {
+          if (pageNum > 0) pdf.addPage();
+          addHeader();
+          // Use negative y-offset to slice the tall image across pages
+          pdf.addImage(
+            imgData, 'PNG',
+            margin, headerHeight + 2 - yOffset,
+            imgWidth, imgHeight
+          );
+          addFooter();
+          yOffset += usableHeight;
+        }
+      } catch (htmlError) {
+        // ────────────────────────────────────────────────────────
+        // FALLBACK: text-based PDF with full branding
+        // ────────────────────────────────────────────────────────
+        console.warn('html2canvas failed, using text fallback:', htmlError);
+        let y = 0;
+
+        const newPage = () => {
+          if (y > 0) pdf.addPage();
+          addHeader();
+          y = 26;
+          addFooter();
+        };
+
+        const checkPage = (needed = 10) => {
+          if (y + needed > pageHeight - 12) {
+            newPage();
+          }
+        };
+
+        const addLabelValue = (label, value) => {
+          checkPage(6);
+          pdf.setTextColor(60, 60, 60);
+          pdf.setFontSize(9);
+          pdf.text(label, margin + 4, y);
+          const valX = margin + 45;
+          pdf.setTextColor(...navy);
+          pdf.setFontSize(9);
+          pdf.text(String(value), valX, y);
+          y += 5.5;
+        };
+
+        newPage();
+
+        // ── Summary Section ─────────────────────────────────
+        if (summary) {
+          y = addSectionTitle(y, 'Summary');
+          addLabelValue('Total Students', summary.totalStudents || 0);
+          addLabelValue('Placed', summary.placed || 0);
+          addLabelValue('Unplaced', summary.unplaced || 0);
+          addLabelValue('Placement %', `${summary.placementPercentage ?? 0}%`);
+          addLabelValue('Average Package', `${summary.avgPackage ?? 0} LPA`);
+          addLabelValue('Highest Package', `${summary.highestPackage ?? 0} LPA`);
+          addLabelValue('Companies', summary.totalCompanies || 0);
+          addLabelValue('Total Drives', summary.totalDrives || 0);
+          y += 3;
+        }
+
+        // ── Branch-wise Section ─────────────────────────────
+        if (branchData.length > 0) {
+          checkPage(12);
+          y = addSectionTitle(y, 'Branch-wise Placement');
+          // Table header
+          checkPage(8);
+          pdf.setFillColor(...lightBlue);
+          pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 6, 'F');
+          pdf.setTextColor(...navy);
+          pdf.setFontSize(8);
+          const colX = [margin + 6, margin + 45, margin + 75, margin + 105];
+          pdf.text('Branch', colX[0], y + 0.5);
+          pdf.text('Total', colX[1], y + 0.5);
+          pdf.text('Placed', colX[2], y + 0.5);
+          pdf.text('Percentage', colX[3], y + 0.5);
+          y += 8;
+
+          branchData.forEach((b, i) => {
+            checkPage(6);
+            if (i % 2 === 1) {
+              pdf.setFillColor(245, 247, 250);
+              pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 5.5, 'F');
+            }
+            pdf.setTextColor(60, 60, 60);
+            pdf.setFontSize(9);
+            pdf.text(b.branch || 'N/A', colX[0], y);
+            pdf.text(String(b.total || 0), colX[1], y);
+            pdf.text(String(b.placed || 0), colX[2], y);
+            pdf.text(`${b.percentage || 0}%`, colX[3], y);
+            y += 6;
+          });
+          y += 4;
+        }
+
+        // ── Company-wise Section ────────────────────────────
+        if (companyWise.length > 0) {
+          checkPage(12);
+          y = addSectionTitle(y, 'Company-wise Hires');
+          checkPage(8);
+          pdf.setFillColor(...lightBlue);
+          pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 6, 'F');
+          pdf.setTextColor(...navy);
+          pdf.setFontSize(8);
+          const cColX = [margin + 6, margin + 70, margin + 120];
+          pdf.text('Company', cColX[0], y + 0.5);
+          pdf.text('Students Hired', cColX[1], y + 0.5);
+          pdf.text('Avg Package', cColX[2], y + 0.5);
+          y += 8;
+
+          companyWise.forEach((c, i) => {
+            checkPage(6);
+            if (i % 2 === 1) {
+              pdf.setFillColor(245, 247, 250);
+              pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 5.5, 'F');
+            }
+            pdf.setTextColor(60, 60, 60);
+            pdf.setFontSize(9);
+            pdf.text(c.companyName || 'N/A', cColX[0], y);
+            pdf.text(String(c.studentsHired || 0), cColX[1], y);
+            pdf.text(`${c.avgPackage || 0} LPA`, cColX[2], y);
+            y += 6;
+          });
+          y += 4;
+        }
+
+        // ── Year-wise Section ───────────────────────────────
+        if (yearWise.length > 0) {
+          checkPage(12);
+          y = addSectionTitle(y, 'Year-wise Statistics');
+          checkPage(8);
+          pdf.setFillColor(...lightBlue);
+          pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 6, 'F');
+          pdf.setTextColor(...navy);
+          pdf.setFontSize(8);
+          const yColX = [margin + 6, margin + 70, margin + 120];
+          pdf.text('Year', yColX[0], y + 0.5);
+          pdf.text('Placed', yColX[1], y + 0.5);
+          pdf.text('Unplaced', yColX[2], y + 0.5);
+          y += 8;
+
+          yearWise.forEach((yr, i) => {
+            checkPage(6);
+            if (i % 2 === 1) {
+              pdf.setFillColor(245, 247, 250);
+              pdf.rect(margin + 2, y - 4, pageWidth - 2 * margin - 4, 5.5, 'F');
+            }
+            pdf.setTextColor(60, 60, 60);
+            pdf.setFontSize(9);
+            pdf.text(String(yr.year || 'N/A'), yColX[0], y);
+            pdf.text(String(yr.placed || 0), yColX[1], y);
+            pdf.text(String(yr.unplaced || 0), yColX[2], y);
+            y += 6;
+          });
+        }
       }
 
       const year = new Date().getFullYear();
-      pdf.save(`placement-report-${year}.pdf`);
+      pdf.save(`TIMSCDR-Placement-Report-${year}.pdf`);
     } catch (error) {
       console.error('PDF export error:', error);
+      alert('Failed to export PDF. Please try again.');
     }
   };
 
