@@ -99,10 +99,10 @@ export default function LoginPage() {
           </Link>
         </p>
 
-        <div className="mt-6 p-3 bg-gray-50 rounded-lg text-xs text-gray-500">
+        {/* <div className="mt-6 p-3 bg-gray-50 rounded-lg text-xs text-gray-500">
           <p className="font-medium mb-1">Demo Accounts:</p>
           <p>Admin: admin@college.edu / admin@123</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
